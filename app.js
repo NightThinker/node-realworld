@@ -8,7 +8,7 @@ const shopRoutes = require('./routes/shop')
 
 const app = express()
 
-app.engine('hbs', expressHds())
+app.engine('hbs', expressHds({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'}))
 // app.set('view engine', 'pug')
 app.set('view engine', 'hbs')
 app.set('views', 'views')
