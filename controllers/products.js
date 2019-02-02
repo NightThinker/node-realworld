@@ -27,13 +27,14 @@ exports.getProduct = (req, res, next) => {
   // console.log('admin data  products :', adminData.products)
   // res.sendFile(path.join(rootDir, 'views', 'shop.html'))
   // const products = adminData.products
-  const products = Products.fetchAll()
-  res.render('shop', {
-    prods: products, 
-    pageTitle: 'Shop', 
-    path: '/', 
-    hasProducts: products.length > 0, 
-    activeShop: true,
-    productCSS: true
+  Products.fetchAll( products => {
+    res.render('shop', {
+      prods: products, 
+      pageTitle: 'Shop', 
+      path: '/', 
+      hasProducts: products.length > 0, 
+      activeShop: true,
+      productCSS: true
+    })
   })
 }
