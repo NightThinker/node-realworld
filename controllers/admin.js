@@ -1,8 +1,4 @@
-// const path = require('path')
-// const rootDir = require('../util/path')
 const Products = require('../models/product')
-// const products = []
-
 
 exports.getAddProduct = (req, res, next) => {
   // res.sendFile(path.join(rootDir, 'views', 'add-product.html'))
@@ -23,18 +19,12 @@ exports.postAddProduct = (req, res,next) => {
   res.redirect('/')
 }
 
-exports.getProduct = (req, res, next) => {
-  // console.log('admin data  products :', adminData.products)
-  // res.sendFile(path.join(rootDir, 'views', 'shop.html'))
-  // const products = adminData.products
+exports.getProducts = (req, res, next) => {
   Products.fetchAll( products => {
-    res.render('shop/product-list', {
+    res.render('admin/products', {
       prods: products, 
-      pageTitle: 'Shop', 
-      path: '/', 
-      hasProducts: products.length > 0, 
-      activeShop: true,
-      productCSS: true
+      pageTitle: 'Admin Products', 
+      path: 'admin/products'
     })
   })
 }
