@@ -4,7 +4,7 @@ const Products = require('../models/product')
 // const products = []
 
 
-exports.getProduct = (req, res, next) => {
+exports.getProducts = (req, res, next) => {
   // console.log('admin data  products :', adminData.products)
   // res.sendFile(path.join(rootDir, 'views', 'shop.html'))
   // const products = adminData.products
@@ -15,6 +15,12 @@ exports.getProduct = (req, res, next) => {
       path: '/products'
     })
   })
+}
+
+exports.getProduct = (req, res, next) => {
+  const prodId = req.params.productId
+  console.log('TCL: exports.getProduct -> prodId', prodId)
+  res.redirect("/")
 }
 
 exports.getIndex = (req, res, next) => {
