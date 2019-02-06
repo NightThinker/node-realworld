@@ -19,7 +19,9 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId
-  console.log('TCL: exports.getProduct -> prodId', prodId)
+  Products.findById(prodId, product => {
+    console.log(product)
+  })
   res.redirect("/")
 }
 
