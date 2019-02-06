@@ -1,6 +1,7 @@
 // const path = require('path')
 // const rootDir = require('../util/path')
 const Products = require('../models/product')
+const Cart = require('../models/cart')
 // const products = []
 
 
@@ -47,7 +48,12 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId =  req.body.productId
-  console.log('TCL: exports.postCart -> prodId', prodId)
+  // console.log('TCL: exports.postCart -> prodId', prodId)
+  Products.findById(prodId, (product) => {
+		// console.log('TCL: exports.postCart -> prodId', prodId)
+		// console.log('TCL: exports.postCart -> product', product)
+    Cart.addProduct(prodId, product.price)
+  })
   res.redirect("/cart")
 }
 
