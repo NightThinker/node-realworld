@@ -30,13 +30,15 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Products.fetchAll( products => {
-    res.render('shop/index', {
-      prods: products, 
-      pageTitle: 'Shop', 
-      path: '/'
+  Products.fetchAll()
+    .then(([rows, filedData]) => {
+      res.render('shop/index', {
+        prods: rows, 
+        pageTitle: 'Shop', 
+        path: '/'
+      })
     })
-  })
+    .catch(err => console.log('err : ', err))
 }
 
 exports.getCart = (req, res, next) => {
