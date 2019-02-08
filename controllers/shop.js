@@ -6,16 +6,15 @@ const Cart = require('../models/cart')
 
 
 exports.getProducts = (req, res, next) => {
-  // console.log('admin data  products :', adminData.products)
-  // res.sendFile(path.join(rootDir, 'views', 'shop.html'))
-  // const products = adminData.products
-  Products.fetchAll( products => {
-    res.render('shop/product-list', {
-      prods: products, 
-      pageTitle: 'All Product', 
-      path: '/products'
+  Products.fetchAll()
+    .then(([rows, filedData]) => {
+      res.render('shop/product-list', {
+        prods: rows, 
+        pageTitle: 'All Product', 
+        path: '/products'
+      })
     })
-  })
+    .catch(err => console.log('err : ', err))
 }
 
 exports.getProduct = (req, res, next) => {
