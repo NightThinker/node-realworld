@@ -64,13 +64,15 @@ exports.postEditProduct = (req, res, next) => {
 
 
 exports.getProducts = (req, res, next) => {
-  Products.fetchAll( products => {
+  Products.findAll()
+  .then(products => {
     res.render('admin/products', {
       prods: products, 
       pageTitle: 'Admin Products', 
       path: 'admin/products'
     })
   })
+  .catch(err => console.log('err : ', err))
 }
 
 exports.postDeleteProduct = (req, res, next) => {
