@@ -15,18 +15,20 @@ exports.postAddProduct = (req, res,next) => {
   const imageUrl = req.body.imageUrl
   const description = req.body.description
   const price = req.body.price
-  Products.create({
-    title: title,
-    price: price,
-    imageUrl: imageUrl,
-    description: description
-  })
-  .then(result => {
-    // console.log('result: ', result)
-    console.log('created Product')
-    res.redirect('/admin/products')
-  })
-  .catch(err => console.log('err: ', err))
+  req.user
+    .createProduct({
+      title: title,
+      price: price,
+      imageUrl: imageUrl,
+      description: description,
+      userId: req.user.id
+    })
+    .then(result => {
+      // console.log('result: ', result)
+      console.log('created Product')
+      res.redirect('/admin/products')
+    })
+    .catch(err => console.log('err: ', err))
   
 }
 

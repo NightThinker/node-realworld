@@ -31,6 +31,7 @@ app.use(shopRoutes)
 
 app.use(errorControllers.get404)
 
+//relationship
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' })
 User.hasMany(Product)
 
