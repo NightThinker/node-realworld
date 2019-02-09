@@ -36,17 +36,30 @@ exports.getEditProduct = (req, res, next) => {
     res.redirect('/')
   }
   const prodId = req.params.productId
-  Products.findById(prodId, product => {
-    if(!product) {
-      return res.redirect('/')
-    }
-    res.render('admin/edit-product', {
-      pageTitle: 'Edit Product', 
-      path: '/admin/edit-product', 
-      editing: editMode,
-      product: product
+  Products.findById(prodId)
+    .then(product => {
+      if(!product) {
+        return res.redirect('/')
+      }
+      res.render('admin/edit-product', {
+        pageTitle: 'Edit Product', 
+        path: '/admin/edit-product', 
+        editing: editMode,
+        product: product
+      })
     })
-  })
+    .catch(err => console.log(err))
+  // Products.findById(prodId, product => {
+  //   if(!product) {
+  //     return res.redirect('/')
+  //   }
+  //   res.render('admin/edit-product', {
+  //     pageTitle: 'Edit Product', 
+  //     path: '/admin/edit-product', 
+  //     editing: editMode,
+  //     product: product
+  //   })
+  // })
 }
 
 exports.postEditProduct = (req, res, next) => {
@@ -55,10 +68,19 @@ exports.postEditProduct = (req, res, next) => {
   const updatedImageUrl = req.body.imageUrl
   const updatedDescription = req.body.description
   const updatedPrice = req.body.price
-  // products.push({title: req.body.title})
-  const updatedProduct = new Products(prodId, updatedTitle, updatedImageUrl, updatedDescription, updatedPrice)
-  updatedProduct.save()
-  res.redirect('/admin/products')
+  Products.findById(prodId)
+    .then(product => {
+      product.title = updatedTitle
+      product.price = updatedPrice
+      product.imageUrl = updatedImageUrl
+      product.description = updatedDescription
+      return product.save()
+    })
+    .then(result => {
+      console.log('Update Product')
+      res.redirect('/admin/products')
+    })
+    .catch(err => console.log(err))
 }
 
 
