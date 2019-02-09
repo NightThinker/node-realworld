@@ -6,15 +6,15 @@ const Cart = require('../models/cart')
 
 
 exports.getProducts = (req, res, next) => {
-  Products.fetchAll()
-    .then(([rows, filedData]) => {
-      res.render('shop/product-list', {
-        prods: rows, 
-        pageTitle: 'All Product', 
-        path: '/products'
-      })
+  Products.findAll()
+  .then(products => {
+    res.render('shop/product-list', {
+      prods: products, 
+      pageTitle: 'All Product', 
+      path: '/products'
     })
-    .catch(err => console.log('err : ', err))
+  })
+  .catch(err => console.log('err : ', err))
 }
 
 exports.getProduct = (req, res, next) => {
@@ -31,15 +31,15 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Products.fetchAll()
-    .then(([rows, filedData]) => {
-      res.render('shop/index', {
-        prods: rows, 
-        pageTitle: 'Shop', 
-        path: '/'
-      })
+  Products.findAll()
+  .then(products => {
+    res.render('shop/index', {
+      prods: products, 
+      pageTitle: 'Shop', 
+      path: '/'
     })
-    .catch(err => console.log('err : ', err))
+  })
+  .catch(err => console.log('err : ', err))
 }
 
 exports.getCart = (req, res, next) => {
