@@ -1,5 +1,5 @@
 {
-  "name": "node-express",
+  "name": "node-mongodb",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NightThinker/node-express.git"
+    "url": "git+https://github.com/NightThinker/node-mongodb.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NightThinker/node-express/issues"
+    "url": "https://github.com/NightThinker/node-mongodb/issues"
   },
-  "homepage": "https://github.com/NightThinker/node-express#readme",
+  "homepage": "https://github.com/NightThinker/node-mongodb#readme",
   "devDependencies": {
     "nodemon": "^1.18.9"
   },
