@@ -3,7 +3,7 @@ const getDb = require('../util/database').getDb
 
 class Product {
   constructor(id, title, price, description, imageUrl) {
-    this._id = id
+    this._id = new mongodb.ObjectId(id)
     this.title = title
     this.price = price
     this.description = description
@@ -15,7 +15,7 @@ class Product {
     let dbOp
     if(this._id) {
       //Update the product
-      dbOp = db.collection('products').updateOne({ _id: new mongodb.ObjectId(this._id) }, { $set: this })
+      dbOp = db.collection('products').updateOne({ _id: this._id }, { $set: this })
     } else {
       //Add the product
       dbOp = db.collection('products').insertOne(this)
