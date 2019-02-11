@@ -1,7 +1,7 @@
-const mongobd = require('mongodb')
+const mongodb = require('mongodb')
 const getDb = require('../util/database').getDb
 
-const ObjectId = mongobd.ObjectId
+const ObjectId = mongodb.ObjectId
 
 class User {
   constructor(name, email) {
@@ -14,10 +14,11 @@ class User {
     return db
       .collection('users')
       .insertOne(this)
-      // .then(() => {
-      //   console.log('Add User')
-      // })
-      // .catch(err => console.log(err))
+      .then(user => {
+        console.log('Add User')
+        return user
+      })
+      .catch(err => console.log(err))
 
   }
 
