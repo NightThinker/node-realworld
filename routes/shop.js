@@ -5,9 +5,9 @@ const shopControllers = require('../controllers/shop')
 
 const router = express.Router()
 
-// router.get('/', shopControllers.getIndex)
+router.get('/', shopControllers.getIndex)
 
-// router.get('/products', shopControllers.getProducts)
+router.get('/products', shopControllers.getProducts)
 // router.get('/products/:productId', shopControllers.getProduct)
 
 // router.get('/cart', shopControllers.getCart)
