@@ -8,7 +8,7 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const errorControllers = require('./controllers/error')
 const User = require('./models/user')
 
-const MONGODB_URI = 'mongodb+srv://may:5221043005@cluster0-rnstb.mongodb.net/shop'
+const MONGODB_URI = 'mongodb+srv://may:9tvmwpZzSvt5hgKv@cluster0-rnstb.mongodb.net/shop'
 
 
 const app = express()
