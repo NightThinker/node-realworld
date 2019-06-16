@@ -3,10 +3,11 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user');
 
 exports.getLogin = (req, res, next) => {
+  console.log(req.flash('error'))
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
-    errorMassage: req.flash('error')
+    errorMessage: req.flash('error')
   })
 }
 
@@ -83,5 +84,12 @@ exports.postLogout = (req, res, next) => {
     console.log(err)
     res.redirect('/')
   })
+}
+
+exports.getReset = (req, res, next) => {
+  res.render('auth/reset', {
+    path: '/reset',
+    pageTitle: 'Reset Password'
+  });
 }
 
