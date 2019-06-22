@@ -95,7 +95,6 @@ exports.postSignup = (req, res, next) => {
       })
       .then(result => {
         res.redirect('/login');
-        console.log("TCL: exports.postSignup -> email", email)
         return transporter.sendMail({
           to: email,
           from: 'node@node.com',
@@ -136,6 +135,7 @@ exports.postReset = (req, res, next) => {
     User.findOne({email: res.body.email})
       .then(user => {
         if(!user) {
+          req.flash('error', 'No account with that email found!.');
           return res.redirect('/reset')
         }
         user.resetToken = token;
@@ -143,7 +143,16 @@ exports.postReset = (req, res, next) => {
         return user.save()
       })
       .then(result => {
-
+        res.redirect('/');
+        transporter.sendMail({
+          to: res.body.email,
+          from: 'node@node.com',
+          subject: 'Password reset',
+          html: `
+            <p>You requested a password reset</p>
+            <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
+          `
+        })
       })
       .catch(err => {
         console.log('err : ', err)
