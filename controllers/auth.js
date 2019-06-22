@@ -84,7 +84,7 @@ exports.postSignup = (req, res, next) => {
         console.log("TCL: exports.postSignup -> email", email)
         return transporter.sendMail({
           to: email,
-          form: 'node@node.com',
+          from: 'node@node.com',
           subject: 'Signup Succeeded!',
           html: '<h1>You Successfully signed up!</h1>'
         })
