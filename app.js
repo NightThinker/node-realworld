@@ -34,8 +34,7 @@ app.use(
     secret: 'my secret', 
     resave: false, 
     saveUninitialized: false, 
-    store: store,
-    cookie: { secure: true }
+    store: store
   })
 );
 app.use(csrfProtection);
