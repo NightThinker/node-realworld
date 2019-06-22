@@ -126,15 +126,16 @@ exports.postEditProduct = (req, res, next) => {
       product.price = updatedPrice;
       product.description = updatedDescription;
       product.imageUrl = updatedImageUrl;
-      return product
-        .save()
-        .then((result) => {
-          console.log('Update Product');
-          res.redirect('/admin/products');
-        })
-        .catch((err) => console.log(err));
+      return product.save().then((result) => {
+        console.log('Update Product');
+        res.redirect('/admin/products');
+      });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getProducts = (req, res, next) => {
@@ -149,7 +150,11 @@ exports.getProducts = (req, res, next) => {
         path: 'admin/products'
       });
     })
-    .catch((err) => console.log('err : ', err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postDeleteProduct = (req, res, next) => {
@@ -159,5 +164,9 @@ exports.postDeleteProduct = (req, res, next) => {
       console.log('Delete Product');
       res.redirect('/admin/products');
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
