@@ -119,9 +119,16 @@ exports.postLogout = (req, res, next) => {
 }
 
 exports.getReset = (req, res, next) => {
+  let message = req.flash('error')
+  if (message.length > 0) {
+    message = message[0];
+  } else {
+    message = null;
+  }
   res.render('auth/reset', {
     path: '/reset',
-    pageTitle: 'Reset Password'
+    pageTitle: 'Reset Password',
+    errorMessage: message
   });
 }
 
@@ -132,7 +139,7 @@ exports.postReset = (req, res, next) => {
       return res.redirect('/reset');
     }
     const token = buffer.toString('hex');
-    User.findOne({email: res.body.email})
+    User.findOne({email: req.body.email})
       .then(user => {
         if(!user) {
           req.flash('error', 'No account with that email found!.');
@@ -145,7 +152,7 @@ exports.postReset = (req, res, next) => {
       .then(result => {
         res.redirect('/');
         transporter.sendMail({
-          to: res.body.email,
+          to: req.body.email,
           from: 'node@node.com',
           subject: 'Password reset',
           html: `
